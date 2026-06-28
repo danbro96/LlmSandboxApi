@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/LlmSandboxApi/LlmSandboxApi.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/LlmSandboxApi.UnitTests/LlmSandboxApi.UnitTests.csproj" />
+  </Folder>
+</Solution>

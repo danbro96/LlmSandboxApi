@@ -1,0 +1,45 @@
+name: Tests
+
+on:
+  workflow_call:
+    inputs:
+      run_integration:
+        description: Also run the integration tests (smoke + Docker-gated runner)
+        type: boolean
+        default: false
+
+env:
+  SOLUTION: LlmSandboxApi.slnx
+  INTEGRATION_PROJECT: tests/LlmSandboxApi.IntegrationTests
+
+jobs:
+  unit:
+    name: Unit tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: '10.0.x'
+      - uses: actions/cache@v5
+        with:
+          path: ~/.nuget/packages
+          key: nuget-${{ runner.os }}-${{ hashFiles('**/*.csproj') }}
+          restore-keys: nuget-${{ runner.os }}-
+      - run: dotnet test ${{ env.SOLUTION }} -c Release --logger "trx;LogFileName=unit.trx"
+
+  integration:
+    name: Integration tests
+    if: ${{ inputs.run_integration }}
+    runs-on: ubuntu-latest   # Docker is preinstalled, so the runner tests execute (not skipped)
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: '10.0.x'
+      - uses: actions/cache@v5
+        with:
+          path: ~/.nuget/packages
+          key: nuget-${{ runner.os }}-${{ hashFiles('**/*.csproj') }}
+          restore-keys: nuget-${{ runner.os }}-
+      - run: dotnet test ${{ env.INTEGRATION_PROJECT }} -c Release --logger "trx;LogFileName=integration.trx"
