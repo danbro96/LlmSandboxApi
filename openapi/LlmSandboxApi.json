@@ -1,0 +1,19 @@
+{
+  "openapi": "3.1.1",
+  "info": {
+    "title": "LlmSandboxApi",
+    "description": "Self-hosted code-execution sandbox for LLM agents, exposed over MCP at /mcp (LAN-only). Runs untrusted Python/JavaScript in throwaway, network-isolated, resource-capped containers. Authenticate with your key in the X-API-Key header.",
+    "version": "v1"
+  },
+  "paths": { },
+  "components": {
+    "securitySchemes": {
+      "ApiKey": {
+        "type": "apiKey",
+        "description": "API key. Send in the X-API-Key header.",
+        "name": "X-API-Key",
+        "in": "header"
+      }
+    }
+  }
+}
