@@ -1,20 +1,12 @@
 namespace LlmSandboxApi.Endpoints;
 
 /// <summary>
-/// Defence-in-depth backstop keeping the MCP surface LAN/WireGuard-only.
-///
-/// <para>
-/// The PRIMARY control is the Cloudflare Tunnel ingress simply not routing <c>/mcp</c> to the
-/// container (host config, outside this repo — see the deploy notes). This middleware is the
-/// belt-and-suspenders that survives an ingress mistake: Cloudflare's edge stamps <c>CF-Ray</c>/
-/// <c>CF-Connecting-IP</c> on everything that arrives through the tunnel, and a direct
-/// LAN/WireGuard request to the container port never carries them — so a tunnelled request to
-/// <c>/mcp*</c> is answered with 404 (indistinguishable from "no such route") before it reaches
-/// the MCP handler.
-/// </para>
-///
-/// Registered as plain middleware rather than an endpoint filter because <c>MapMcp</c>'s
-/// streaming endpoint does not run the minimal-API filter pipeline.
+/// Defence-in-depth backstop keeping the prefixes below LAN/WireGuard-only. The PRIMARY control is the
+/// Cloudflare Tunnel ingress not routing them to the container (host config, outside this repo). This
+/// middleware survives an ingress mistake: anything through the Cloudflare edge carries <c>CF-Ray</c>/
+/// <c>CF-Connecting-IP</c>, which a direct LAN/WireGuard request never does — so a tunnelled hit is
+/// answered 404, indistinguishable from "no such route". Plain middleware rather than an endpoint filter
+/// because <c>MapMcp</c>'s streaming endpoint does not run the minimal-API filter pipeline.
 /// </summary>
 internal static class McpExposure
 {
