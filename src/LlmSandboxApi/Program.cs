@@ -98,7 +98,12 @@ if (!string.IsNullOrWhiteSpace(otlpEndpoint))
             serviceVersion: typeof(Program).Assembly.GetName().Version?.ToString() ?? "0.0.0"))
         .WithTracing(t => t
             .AddSource("LlmSandboxApi.*")
-            .AddAspNetCoreInstrumentation(o => o.RecordException = true)
+            .AddAspNetCoreInstrumentation(o =>
+            {
+                o.RecordException = true;
+                // Health probes are polled constantly by docker + devops-monitor; their spans add nothing.
+                o.Filter = ctx => ctx.Request.Path != "/livez" && ctx.Request.Path != "/readyz";
+            })
             .AddHttpClientInstrumentation()
             .AddOtlpExporter())
         .WithMetrics(m => m
