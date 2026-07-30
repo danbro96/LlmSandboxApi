@@ -4,7 +4,7 @@ root = true
 # All files
 [*]
 charset = utf-8
-end_of_line = crlf
+end_of_line = lf
 insert_final_newline = true
 trim_trailing_whitespace = true
 
@@ -12,8 +12,8 @@ trim_trailing_whitespace = true
 [*.{js,jsx,ts,tsx}]
 charset = utf-8
 indent_style = space
-indent_size = 4
-end_of_line = crlf
+indent_size = 2
+end_of_line = lf
 insert_final_newline = true
 trim_trailing_whitespace = true
 
@@ -22,7 +22,7 @@ trim_trailing_whitespace = true
 charset = utf-8
 indent_style = space
 indent_size = 2
-end_of_line = crlf
+end_of_line = lf
 insert_final_newline = true
 trim_trailing_whitespace = true
 
@@ -30,8 +30,8 @@ trim_trailing_whitespace = true
 [*.{css,postcss}]
 charset = utf-8
 indent_style = space
-indent_size = 4
-end_of_line = crlf
+indent_size = 2
+end_of_line = lf
 insert_final_newline = true
 trim_trailing_whitespace = true
 
@@ -40,7 +40,7 @@ trim_trailing_whitespace = true
 charset = utf-8
 indent_style = space
 indent_size = 4
-end_of_line = crlf
+end_of_line = lf
 insert_final_newline = true
 trim_trailing_whitespace = true
 
@@ -66,7 +66,7 @@ indent_style = space
 tab_width = 4
 
 # New line preferences
-end_of_line = crlf
+end_of_line = lf
 insert_final_newline = true
 dotnet_style_allow_multiple_blank_lines_experimental = false:warning
 dotnet_style_allow_statement_immediately_after_block_experimental = true
@@ -76,7 +76,7 @@ dotnet_style_allow_statement_immediately_after_block_experimental = true
 
 # Organize usings
 dotnet_separate_import_directive_groups = false
-dotnet_sort_system_directives_first = false
+dotnet_sort_system_directives_first = true
 file_header_template = unset
 
 # this. and Me. preferences
@@ -331,7 +331,7 @@ dotnet_diagnostic.IDE0052.severity = error
 
 
 # Använd alltid var
-dotnet_diagnostic.CA1822.severity = warning
+dotnet_diagnostic.CA1822.severity = suggestion
 dotnet_diagnostic.IDE0055.severity = warning
 dotnet_diagnostic.SA1507.severity = error
 
@@ -452,3 +452,7 @@ dotnet_diagnostic.SA1601.severity = none
 
 resharper_redundant_string_interpolation_highlighting=warning
 csharp_prefer_system_threading_lock = true:suggestion
+
+# EF Core migrations are generated code; exclude from style analysis.
+[**/Migrations/*.cs]
+generated_code = true

@@ -1,3 +1,4 @@
+using System.Threading.RateLimiting;
 using LlmSandboxApi.Auth;
 using LlmSandboxApi.Endpoints;
 using LlmSandboxApi.Services;
@@ -7,7 +8,6 @@ using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
 using Scalar.AspNetCore;
-using System.Threading.RateLimiting;
 
 var builder = WebApplication.CreateBuilder(args);
 
