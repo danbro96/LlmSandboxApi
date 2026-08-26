@@ -6,15 +6,6 @@ using Microsoft.Extensions.Options;
 
 namespace LlmSandboxApi.Services;
 
-public sealed record RunResult(
-    string Stdout,
-    string Stderr,
-    long ExitCode,
-    bool TimedOut,
-    bool OomKilled,
-    long DurationMs,
-    bool OutputTruncated);
-
 /// <summary>
 /// Runs untrusted code in a throwaway, hardened container on a co-located Docker engine: no network,
 /// read-only rootfs (+ small tmpfs), all caps dropped, no-new-privileges, non-root, with memory/cpu/pids
