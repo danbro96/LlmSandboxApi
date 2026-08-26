@@ -445,6 +445,10 @@ dotnet_diagnostic.SA1206.severity = none
 dotnet_diagnostic.SA1010.severity = none
 dotnet_diagnostic.SA1601.severity = none
 
+# One top-level type per file, and the file is named after it.
+dotnet_diagnostic.SA1402.severity = error
+dotnet_diagnostic.SA1649.severity = error
+
 
 ###########################################################
 ######################## Resharper ########################

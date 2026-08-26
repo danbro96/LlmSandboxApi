@@ -1,0 +1,12 @@
+<Project>
+
+  <ItemGroup>
+    <!-- SA1402 (one type per file) + SA1649 (file name matches type) are the enforced rules;
+         see the StyleCop section of .editorconfig. Everything else StyleCop reports stays advisory. -->
+    <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.556">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+</Project>
