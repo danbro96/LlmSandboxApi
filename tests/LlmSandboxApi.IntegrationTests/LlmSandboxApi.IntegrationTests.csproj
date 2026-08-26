@@ -9,7 +9,6 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
-    <RootNamespace>LlmSandboxApi.IntegrationTests</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
