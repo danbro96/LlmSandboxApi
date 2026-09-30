@@ -1,6 +1,7 @@
 using System.Threading.RateLimiting;
 using LlmSandboxApi.Auth;
 using LlmSandboxApi.Endpoints;
+using LlmSandboxApi.Mcp;
 using LlmSandboxApi.Services;
 using Microsoft.OpenApi;
 using OpenTelemetry.Logs;
@@ -23,6 +24,7 @@ builder.Services.AddSingleton<CodeRunner>();
 builder.Services
     .AddMcpServer()
     .WithHttpTransport()
+    .WithRequestFilters(f => f.AddCallToolFilter(StrictToolArguments.Filter))
     .WithToolsFromAssembly();
 
 builder.Services.AddAppHealthChecks();
